@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ATAMURA CRM: AS IS / TO BE</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5b6673;
+      --line: #d9e1ea;
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --blue: #2458a6;
+      --blue-soft: #e8f0fb;
+      --red: #b42318;
+      --red-soft: #fde8e5;
+      --green: #137a4d;
+      --green-soft: #e5f4ed;
+      --amber: #a15c07;
+      --amber-soft: #fff2d8;
+      --violet: #6a4bbc;
+      --violet-soft: #f0ebff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 840px;
+      font-size: 15px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--blue-soft);
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 18px 0;
+    }
+
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .flow {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px 14px;
+      background: #fff;
+      min-height: 72px;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: "↓";
+      position: absolute;
+      left: 50%;
+      bottom: -18px;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-weight: 700;
+      background: var(--bg);
+      width: 24px;
+      height: 18px;
+      text-align: center;
+      line-height: 18px;
+    }
+
+    .step-title {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .num {
+      display: inline-flex;
+      width: 24px;
+      height: 24px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .risk {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: var(--red-soft);
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .control {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .rule {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: var(--amber-soft);
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .kpi strong {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+
+    .kpi span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .matrix th, .matrix td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .matrix th {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .matrix td:first-child {
+      font-weight: 800;
+      width: 20%;
+    }
+
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-right: 6px;
+      margin-bottom: 4px;
+      background: var(--violet-soft);
+      color: var(--violet);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .kpi-grid, header { grid-template-columns: 1fr; }
+      .page { padding: 16px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 14px; }
+      .section, .kpi { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <h1>CRM и телемаркетинг: AS IS / TO BE</h1>
+        <div class="subtitle">
+          Схема построена по текущим наблюдениям и проверке агентом-критиком: в Bitrix уже есть воронка телемаркетинга и стадии, но дисциплина квалификации слабая. Целевой процесс начинается мягко: 7 дней shadow-аудита без блокировок, затем поэтапное усиление правил.
+        </div>
+      </div>
+      <div class="badge">Черновик для согласования</div>
+    </header>
+
+    <section class="kpi-grid">
+      <div class="kpi"><strong>1500</strong><span>апрельских транскриптов в исходном анализе</span></div>
+      <div class="kpi"><strong>52 сек</strong><span>медианная длительность звонка</span></div>
+      <div class="kpi"><strong>50</strong><span>проблемных звонков разобрано глубже</span></div>
+      <div class="kpi"><strong>2→5</strong><span>сначала 2 правила, затем 5 полей дисциплины</span></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="section">
+        <h2>AS IS: как процесс выглядит сейчас</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="step-title"><span class="num">1</span>Лид приходит из канала</div>
+            <p>Сайт, звонок, WhatsApp, соцсети, Крыша, Marquiz, отдел продаж и другие источники попадают в CRM.</p>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">2</span>Создаётся лид/сделка</div>
+            <p>Источник и стадия в основном есть. В Bitrix уже настроена воронка телемаркетинга.</p>
+            <div class="control">Что уже есть: стадии, источники, ответственные, история активностей.</div>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">3</span>Менеджер звонит клиенту</div>
+            <p>Звонок фиксируется, есть транскрипт или история активности. Но разговор не всегда превращается в структурированную квалификацию.</p>
+            <div class="risk">Риск: короткие звонки и слабое выявление потребности.</div>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">4</span>Менеджер двигает стадию</div>
+            <p>Сделка может перейти в “перезвонить”, “недозвон”, “лид квалифицирован”, “записан на встречу” или “отказ”.</p>
+            <div class="risk">Риск: стадия меняется, но бюджет, ЖК и следующий шаг не заполнены.</div>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">5</span>Контроль идёт постфактум</div>
+            <p>РОП видит общую воронку, но не всегда видит качество каждого звонка и нарушения дисциплины в день обращения.</p>
+            <div class="risk">Главная потеря: “позвонили” не равно “обработали”.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>TO BE: целевой процесс дисциплины</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="step-title"><span class="num">1</span>Лид попадает в Bitrix</div>
+            <p>Источник, канал, рекламная метка и ответственный фиксируются автоматически.</p>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">2</span>Первый контакт по стандарту</div>
+            <p>На первом этапе менеджер не блокируется формами. AI проверяет, понятен ли интерес клиента и есть ли следующий шаг.</p>
+            <div class="rule">Shadow-режим: сначала измеряем дисциплину, потом включаем обязательные правила.</div>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">3</span>Два первых правила дисциплины</div>
+            <p>После полноценного контакта должны быть зафиксированы: ключевой интерес клиента и следующий шаг с датой/каналом.</p>
+            <div class="control">Контроль: нет следующего шага = лид в красной зоне.</div>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">4</span>AI сверяет звонок с CRM</div>
+            <p>ИИ сравнивает транскрипт и карточку: сказал “скину” — должна быть задача; обсуждали бюджет — он должен быть в CRM.</p>
+            <div class="control">Контроль: AI формирует список лидов с риском потери.</div>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">5</span>Постепенное усиление правил</div>
+            <p>После 7 дней проверки добавляются бюджет/ПВ, ЖК, срок покупки и способ оплаты как обязательные поля на нужных стадиях.</p>
+            <div class="control">Итог: дисциплина усиливается без резкого торможения менеджеров.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Роли и контрольные точки</h2>
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Роль</th>
+            <th>Что делает</th>
+            <th>Что контролируем</th>
+            <th>Результат</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Менеджер</td>
+            <td>Звонит, выявляет потребность, фиксирует квалификацию, назначает следующий шаг.</td>
+            <td><span class="pill">интерес</span><span class="pill">следующий шаг</span><span class="pill">бюджет</span><span class="pill">ЖК</span><span class="pill">срок</span><span class="pill">оплата</span></td>
+            <td>Лид не теряется после первого разговора.</td>
+          </tr>
+          <tr>
+            <td>РОП</td>
+            <td>Каждый день смотрит красную зону, разбирает звонки и возвращает лиды в работу.</td>
+            <td>Нарушения по менеджерам, просроченные follow-up, лиды без следующего шага.</td>
+            <td>Появляется ежедневная дисциплина, а не разбор “задним числом”.</td>
+          </tr>
+          <tr>
+            <td>AI-аудитор</td>
+            <td>Сравнивает транскрипт, CRM-карточку и стадию.</td>
+            <td>Расхождения: в звонке было, в CRM не внесено; обещали действие, задачи нет.</td>
+            <td>Контроль становится масштабируемым без ручной прослушки всех звонков.</td>
+          </tr>
+          <tr>
+            <td>Telegram-бот</td>
+            <td>Включается после shadow-режима: доставляет напоминания и отчёты менеджерам, РОПу и PM.</td>
+            <td>Повторные нарушения, горячие лиды без follow-up, топ-10 рисков дня.</td>
+            <td>Команда видит, что именно надо исправить сегодня, без потока мелких ошибок.</td>
+          </tr>
+          <tr>
+            <td>PM / коммерческий блок</td>
+            <td>Смотрит недельную динамику и принимает решения по скриптам, обучению, рекламе.</td>
+            <td>Доля лидов с полной квалификацией, встречи, визиты, причины отказа.</td>
+            <td>Маркетинг и продажи управляются по фактам, а не по ощущениям.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="grid-2">
+      <div class="section">
+        <h2>Shadow-MVP на 7 дней</h2>
+        <table class="matrix">
+          <thead>
+            <tr><th>День</th><th>Действие</th><th>Готово, если</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Утвердить 2 первых правила: интерес клиента и следующий шаг.</td><td>РОП и PM согласовали мягкий контроль без блокировок.</td></tr>
+            <tr><td>2</td><td>Снять текущую выгрузку Bitrix + транскрипты.</td><td>Есть базовая картина заполненности и рисков.</td></tr>
+            <tr><td>3</td><td>Собрать AI-отчёт в shadow-режиме.</td><td>AI показывает нарушения, но менеджеров пока не блокирует.</td></tr>
+            <tr><td>4</td><td>Провести первую планёрку по топ-10 красной зоны.</td><td>РОП разбирает не все ошибки, а самые денежные риски.</td></tr>
+            <tr><td>5-7</td><td>Проверить точность AI и реакцию отдела.</td><td>Понятно, какие поля можно делать обязательными без торможения продаж.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>Что не делать первым</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="step-title"><span class="num">×</span>Не начинать с нового сложного бота</div>
+            <p>До проверки процесса бот будет только усиливать шум и сопротивление отдела.</p>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">×</span>Не блокировать менеджеров сразу</div>
+            <p>Жёсткие обязательные поля без теста могут привести к фиктивному заполнению и снижению скорости.</p>
+          </div>
+          <div class="step">
+            <div class="step-title"><span class="num">×</span>Не слушать все звонки вручную</div>
+            <p>Сначала нужна красная зона: нет бюджета, нет ЖК, нет следующего шага, просрочен follow-up.</p>
+          </div>
+        </div>
+        <p class="note">Рекомендуемый порядок: shadow-аудит → 2 правила → 5 полей → Telegram-бот для повторных нарушений.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
